@@ -25,4 +25,4 @@ fi
 gitversion="_BASE-rev`(cd $CURDIR/../../cdk && git log | grep "^commit" | wc -l)`$HAL_REV$NMP_REV"
 
 echo $gitversion
-#export gitversion
+export gitversion
