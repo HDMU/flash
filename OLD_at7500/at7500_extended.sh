@@ -9,7 +9,7 @@ CURDIR=`pwd`
 BASEDIR=$CURDIR/../..
 
 TUFSBOXDIR=$BASEDIR/tufsbox
-CDKDIR=$BASEDIR/cvs/cdk
+CDKDIR=$BASEDIR/cdk
 
 SCRIPTDIR=$CURDIR/scripts_extended
 TMPDIR=$CURDIR/tmp

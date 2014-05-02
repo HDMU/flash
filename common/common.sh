@@ -55,8 +55,8 @@ if [ ! -e $CURDIR/mksquashfs4.0 ]; then
   tar -xzf $CURDIR/squashfs4.0.tar.gz
   tar -xjf $CURDIR/lzma465.tar.bz2
   cd $CURDIR/squashfs-tools/squashfs4.0/squashfs-tools
-  echo "patch -p1 < $BASEDIR/cvs/cdk/Patches/squashfs-tools-4.0-lzma.patch"
-  patch -p1 < $BASEDIR/cvs/cdk/Patches/squashfs-tools-4.0-lzma.patch
+  echo "patch -p1 < $BASEDIR/cdk/Patches/squashfs-tools-4.0-lzma.patch"
+  patch -p1 < $BASEDIR/cdk/Patches/squashfs-tools-4.0-lzma.patch
   make all
   mv $CURDIR/squashfs-tools/squashfs4.0/squashfs-tools/mksquashfs $CURDIR/mksquashfs4.0
   mv $CURDIR/squashfs-tools/squashfs4.0/squashfs-tools/unsquashfs $CURDIR/unsquashfs4.0

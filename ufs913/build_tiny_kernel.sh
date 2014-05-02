@@ -1,7 +1,7 @@
 #!/bin/sh
 
 CURDIR=`pwd`
-CDK=$CURDIR/../../cvs/cdk
+CDK=$CURDIR/../../cdk
 
 mv $CDK/Patches/linux-sh4-ufs913_setup_stm24_0209.patch $CDK/Patches/linux-sh4-ufs913_setup_stm24_0209.patch.org
 mv $CDK/Patches/linux-sh4-2.6.32.46-0209_ufs913.config.debug $CDK/Patches/linux-sh4-2.6.32.46-0209_ufs913.config.debug.org

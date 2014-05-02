@@ -24,27 +24,8 @@ elif [ -f $TMPROOTDIR/var/etc/hostname ]; then
 	HOST=`cat $TMPROOTDIR/var/etc/hostname`
 fi
 
-if [ -d $CURDIR/../../cvs/apps/libstb-hal-next ]; then
-	HAL_REV=_HAL-rev`cd $CURDIR/../../cvs/apps/libstb-hal-next && git log | grep "^commit" | wc -l`-next
-elif [ -d $CURDIR/../../cvs/apps/libstb-hal-github ]; then
-	HAL_REV=_HAL-rev`cd $CURDIR/../../cvs/apps/libstb-hal-github && git log | grep "^commit" | wc -l`-github
-elif [ -d $CURDIR/../../cvs/apps/libstb-hal-martii-github ]; then
-	HAL_REV=_HAL-rev`cd $CURDIR/../../cvs/apps/libstb-hal-martii-github && git log | grep "^commit" | wc -l`-martii-github
-else
-	HAL_REV=_HAL-rev`cd $CURDIR/../../cvs/apps/libstb-hal && git log | grep "^commit" | wc -l`
-fi
+$CURDIR/../common/gitversion.sh $CURDIR
 
-if [ -d $CURDIR/../../cvs/apps/neutrino-mp-next ]; then
-	NMP_REV=_NMP-rev`cd $CURDIR/../../cvs/apps/neutrino-mp-next && git log | grep "^commit" | wc -l`-next
-elif [ -d $CURDIR/../../cvs/apps/neutrino-mp-github ]; then
-	NMP_REV=_NMP-rev`cd $CURDIR/../../cvs/apps/neutrino-mp-github && git log | grep "^commit" | wc -l`-github
-elif [ -d $CURDIR/../../cvs/apps/neutrino-mp-martii-github ]; then
-	NMP_REV=_NMP-rev`cd $CURDIR/../../cvs/apps/neutrino-mp-martii-github && git log | grep "^commit" | wc -l`-martii-github
-else
-	NMP_REV=_NMP-rev`cd $CURDIR/../../cvs/apps/neutrino-mp && git log | grep "^commit" | wc -l`
-fi
-
-gitversion="_BASE-rev`(cd $CURDIR/../../ && git log | grep "^commit" | wc -l)`$HAL_REV$NMP_REV"
 OUTFILE=$OUTDIR/$HOST$gitversion
 
 if [ ! -e $OUTDIR ]; then
