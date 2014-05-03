@@ -24,7 +24,7 @@ elif [ -f $TMPROOTDIR/var/etc/hostname ]; then
 	HOST=`cat $TMPROOTDIR/var/etc/hostname`
 fi
 
-$CURDIR/../common/gitversion.sh $CURDIR
+. $CURDIR/../common/gitversion.sh $CURDIR
 
 OUTFILE=$OUTDIR/$HOST$gitversion
 

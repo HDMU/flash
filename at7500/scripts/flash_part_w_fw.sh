@@ -23,7 +23,7 @@ FUP=$CURDIR/fup
 
 HOST=`cat $TMPEXTDIR/etc/hostname`
 
-$CURDIR/../common/gitversion.sh $CURDIR
+. $CURDIR/../common/gitversion.sh $CURDIR
 
 OUTFILE=$OUTDIR/update_w_fw.ird
 OUTFILE_Z=$OUTDIR/$HOST$gitversion

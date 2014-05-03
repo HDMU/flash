@@ -25,7 +25,7 @@ elif [ -f $TMPVARDIR/etc/hostname ]; then
 	HOST=`cat $TMPVARDIR/etc/hostname`
 fi
 
-$CURDIR/../common/gitversion.sh $CURDIR
+. $CURDIR/../common/gitversion.sh $CURDIR
 
 OUTFILE=$OUTDIR/miniFLASH.img
 OUTFILE_Z=$OUTDIR/$HOST$gitversion
