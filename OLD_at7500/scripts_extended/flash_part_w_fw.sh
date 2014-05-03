@@ -21,7 +21,10 @@ SUMTOOL=$TUFSBOXDIR/host/bin/sumtool
 PAD=$CURDIR/../common/pad
 FUP=$CURDIR/fup
 
+. $CURDIR/../common/gitversion.sh $CURDIR
+
 OUTFILE=$OUTDIR/update_w_fw.ird
+OUTFILE_Z=$OUTDIR/$HOST$gitversion
 
 if [ ! -e $OUTDIR ]; then
   mkdir $OUTDIR
@@ -87,4 +90,5 @@ rm -f $CURDIR/mtd_ext.bin
 rm -f $CURDIR/mtd_ext.sum.bin
 rm -f $CURDIR/mtd_ext.sum.pad.bin
 
-zip -j $OUTFILE.zip $OUTFILE
+md5sum -b $OUTFILE | awk -F' ' '{print $1}' > $OUTFILE.md5
+zip -j $OUTFILE_Z.zip $OUTFILE $OUTFILE.md5
