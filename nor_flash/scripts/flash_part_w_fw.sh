@@ -116,10 +116,10 @@ $PAD $SIZE_ROOT $CURDIR/mtd_root.bin $CURDIR/mtd_root.pad.bin
 
 # --- VAR ---
 # Create a jffs2 partition for var
-echo "MKFSJFFS2 -qUfv -p$SIZE_VAR -e$ERASE_SIZE -r $TMPVARDIR -o $CURDIR/mtd_var.bin"
-$MKFSJFFS2 -qUfv -p$SIZE_VAR -e$ERASE_SIZE -r $TMPVARDIR -o $CURDIR/mtd_var.bin
-echo "SUMTOOL -v -p -e $ERASE_SIZE -i $CURDIR/mtd_var.bin -o $CURDIR/mtd_var.sum.bin"
-$SUMTOOL -v -p -e $ERASE_SIZE -i $CURDIR/mtd_var.bin -o $CURDIR/mtd_var.sum.bin
+echo "MKFSJFFS2 -qUf -p$SIZE_VAR -e$ERASE_SIZE -r $TMPVARDIR -o $CURDIR/mtd_var.bin"
+$MKFSJFFS2 -qUf -p$SIZE_VAR -e$ERASE_SIZE -r $TMPVARDIR -o $CURDIR/mtd_var.bin
+echo "SUMTOOL -p -e $ERASE_SIZE -i $CURDIR/mtd_var.bin -o $CURDIR/mtd_var.sum.bin"
+$SUMTOOL -p -e $ERASE_SIZE -i $CURDIR/mtd_var.bin -o $CURDIR/mtd_var.sum.bin
 echo "$PAD $SIZE_VAR $CURDIR/mtd_var.sum.bin $CURDIR/mtd_var.sum.pad.bin"
 $PAD $SIZE_VAR $CURDIR/mtd_var.sum.bin $CURDIR/mtd_var.sum.pad.bin
 

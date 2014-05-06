@@ -22,7 +22,7 @@ else
 	NMP_REV=_NMP-rev`cd $CURDIR/../../apps/neutrino-mp && git log | grep "^commit" | wc -l`
 fi
 
-gitversion="_BASE-rev`(cd $CURDIR/../../cdk && git log | grep "^commit" | wc -l)`$HAL_REV$NMP_REV"
+gitversion="_CDK-rev`(cd $CURDIR/../../cdk && git log | grep "^commit" | wc -l)`$HAL_REV$NMP_REV"
 
-echo $gitversion
+echo "GITVERSION   = $gitversion"
 export gitversion

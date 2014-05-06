@@ -12,7 +12,7 @@ find $RELEASEDIR -mindepth 1 -maxdepth 1 -exec cp -at$TMPROOTDIR -- {} +
 if [ ! -e $TMPROOTDIR/dev/mtd0 ]; then
 	cd $TMPROOTDIR/dev/
 	if [ -e $TMPROOTDIR/var/etc/init.d/makedev ]; then
-		$TMPROOTDIR/var/etc/init.d/makedev start
+		$TMPROOTDIR/var/etc/init.d/makedev start 2>/dev/null
 	else
 		$TMPROOTDIR/etc/init.d/makedev start
 	fi
