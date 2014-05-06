@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ `id -u` != 0 ]; then
-	echo "You are not running this script as root. Try it again as root or with su/sudo command."
+        echo "You are not running this script with fakeroot! Try it again with \"fakeroot ./ufs913.sh\"."
 	echo "Bye Bye..."
 	exit
 fi
