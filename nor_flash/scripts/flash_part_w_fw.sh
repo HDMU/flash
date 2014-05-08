@@ -147,21 +147,21 @@ rm -f $CURDIR/mtd_var.bin
 rm -f $CURDIR/mtd_var.sum.bin
 
 SIZE=`stat mtd_kernel.pad.bin -t --format %s`
-SIZE=`printf "0x%x" $SIZE`
+SIZE=`printf "0x%X" $SIZE`
 if [[ $SIZE > "$SIZE_KERNEL" ]]; then
   echo -e "\e[31mKERNEL TO BIG. $SIZE instead of $SIZE_KERNEL\e[0m" > /dev/stderr
   read -p "Press ENTER to continue..."
 fi
 
 SIZE=`stat mtd_root.pad.bin -t --format %s`
-SIZE=`printf "0x%x" $SIZE`
+SIZE=`printf "0x%X" $SIZE`
 if [[ $SIZE > "$SIZE_ROOT" ]]; then
   echo -e "\e[31mROOT TO BIG. $SIZE instead of $SIZE_ROOT\e[0m" > /dev/stderr
   read -p "Press ENTER to continue..."
 fi
 
 SIZE=`stat mtd_var.sum.pad.bin -t --format %s`
-SIZE=`printf "0x%x" $SIZE`
+SIZE=`printf "0x%X" $SIZE`
 if [[ $SIZE > "$SIZE_VAR" ]]; then
   echo -e "\e[31mVAR TO BIG. $SIZE instead of $SIZE_VAR\e[0m" > /dev/stderr
   read -p "Press ENTER to continue..."
