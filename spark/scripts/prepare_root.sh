@@ -20,5 +20,3 @@ fi
 
 # --- BOOT ---
 mv $TMPROOTDIR/boot/uImage $TMPKERNELDIR/uImage
-mv $TMPROOTDIR/lib/firmware/video.elf $TMPROOTDIR/boot/
-mv $TMPROOTDIR/lib/firmware/audio.elf $TMPROOTDIR/boot/
