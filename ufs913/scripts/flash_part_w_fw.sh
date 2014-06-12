@@ -73,8 +73,3 @@ rm -f $OUTDIR/mtd_root.bin
 #;
 #EOF
 
-zip -j $OUTFILE.zip $OUTDIR/uImage.bin $OUTDIR/mtd_fw.sum.bin $OUTDIR/mtd_root.sum.bin $OUTDIR/ufs913.software.V1.00.B00.data
-rm -f $OUTDIR/uImage.bin
-rm -f $OUTDIR/mtd_fw.sum.bin
-rm -f $OUTDIR/mtd_root.sum.bin
-rm -f $OUTDIR/ufs913.software.V1.00.B00.data
