@@ -51,7 +51,7 @@ echo "-----------------------------------------------------------------------"
 echo "Creating flash image..."
 $SCRIPTDIR/flash_part_w_fw.sh $CURDIR $TUFSBOXDIR $OUTDIR $TMPKERNELDIR $TMPROOTDIR
 echo "-----------------------------------------------------------------------"
-AUDIOELFSIZE=`stat -c %s $TMPROOTDIR/lib/firmware/audio.elf`
+AUDIOELFSIZE=`stat -c %s $TMPROOTDIR/boot/audio.elf`
 if [ "$AUDIOELFSIZE" == "0" -o "$AUDIOELFSIZE" == "" ]; then
   echo -e "\033[01;31m"
   echo "!!! WARNING: AUDIOELF SIZE IS ZERO OR MISSING !!!"
@@ -59,7 +59,7 @@ if [ "$AUDIOELFSIZE" == "0" -o "$AUDIOELFSIZE" == "" ]; then
   echo  "-----------------------------------------------------------------------"
   echo -e "\033[00m"
 fi
-VIDEOELFSIZE=`stat -c %s $TMPROOTDIR/lib/firmware/video.elf`
+VIDEOELFSIZE=`stat -c %s $TMPROOTDIR/boot/video.elf`
 if [ "$VIDEOELFSIZE" == "0" -o "$VIDEOELFSIZE" == "" ]; then
   echo -e "\033[01;31m"
   echo "!!! WARNING: VIDEOELF SIZE IS ZERO OR MISSING !!!"
