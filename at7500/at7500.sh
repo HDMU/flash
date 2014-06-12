@@ -62,7 +62,7 @@ OWNLANG=nl
 OWNCOUNTRY=NL
 
 TUFSBOXDIR=$BASEDIR/tufsbox
-CDKDIR=$BASEDIR/cvs/cdk
+CDKDIR=$BASEDIR/cdk
 $BASEDIR/flash/common/common.sh $BASEDIR/flash/common/
 SCRIPTDIR=$CURDIR/scripts
 TMPDIR=$CURDIR/tmp
