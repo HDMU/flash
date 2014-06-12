@@ -22,7 +22,6 @@ fi
 
 mv $TMPROOTDIR/var/* $TMPEXTDIR
 mv $TMPROOTDIR/boot/uImage $TMPKERNELDIR/uImage
-rm -fr $TMPROOTDIR/boot
 mv $TMPROOTDIR/lib/firmware/* $TMPFWDIR
 
 # mini-rcS and inittab
