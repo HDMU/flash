@@ -74,10 +74,3 @@ $MUP c $OUTFILE << EOF
 ;
 EOF
 
-md5sum -b $OUTFILE | awk -F' ' '{print $1}' > $OUTFILE.md5
-zip -j $OUTFILE_Z.zip $OUTFILE $OUTFILE.md5
-rm -f $OUTFILE
-rm -f $OUTFILE.md5
-rm -f $OUTDIR/uImage.bin
-rm -f $OUTDIR/mtd_fw.sum.bin
-rm -f $OUTDIR/mtd_root.sum.bin
