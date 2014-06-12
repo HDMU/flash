@@ -2,36 +2,62 @@
 
 CURDIR=$1
 RELEASEDIR=$2
-
 TMPROOTDIR=$3
-TMPEXTDIR=$4
-TMPKERNELDIR=$5
-TMPFWDIR=$6
+TMPKERNELDIR=$4
+OWNLANG=$5
+OWNCOUNTRY=$6
 
-find $RELEASEDIR -mindepth 1 -maxdepth 1 -exec cp -at$TMPROOTDIR -- {} +
+echo "Copying release image..."
+cp -a $RELEASEDIR/* $TMPROOTDIR
 
-if [ ! -e $TMPROOTDIR/dev/mtd0 ]; then
-	cd $TMPROOTDIR/dev/
-	if [ -e $TMPROOTDIR/var/etc/init.d/makedev ]; then
-		$TMPROOTDIR/var/etc/init.d/makedev start
-	else
-		$TMPROOTDIR/etc/init.d/makedev start
-	fi
-	cd -
-fi
+cd $TMPROOTDIR/dev/
+$TMPROOTDIR/etc/init.d/makedev start
+cd - > /dev/null
 
-mv $TMPROOTDIR/var/* $TMPEXTDIR
+echo "Move kernel..."
 mv $TMPROOTDIR/boot/uImage $TMPKERNELDIR/uImage
-mv $TMPROOTDIR/lib/firmware/* $TMPFWDIR
 
-# mini-rcS and inittab
-rm -f $TMPROOTDIR/etc
-mkdir -p $TMPROOTDIR/etc/init.d
-echo "#!/bin/sh" > $TMPROOTDIR/etc/init.d/rcS
-echo "mount -n -t proc proc /proc" >> $TMPROOTDIR/etc/init.d/rcS
-echo "mount -t jffs2 -o rw,noatime,nodiratime /dev/mtdblock2 /lib/firmware" >> $TMPROOTDIR/etc/init.d/rcS
-echo "mount -t jffs2 -o rw,noatime,nodiratime /dev/mtdblock3 /var" >> $TMPROOTDIR/etc/init.d/rcS
-echo "mount --bind /var/etc /etc" >> $TMPROOTDIR/etc/init.d/rcS
-echo "/etc/init.d/rcS &" >> $TMPROOTDIR/etc/init.d/rcS
-chmod 755 $TMPROOTDIR/etc/init.d/rcS
-cp -f $TMPEXTDIR/etc/inittab $TMPROOTDIR/etc
+echo "Strip Root..."
+# Language support: remove everything but English, German and own language
+mv $TMPROOTDIR/usr/local/share/enigma2/po $TMPROOTDIR/usr/local/share/enigma2/po.old
+mkdir $TMPROOTDIR/usr/local/share/enigma2/po
+cp -r $TMPROOTDIR/usr/local/share/enigma2/po.old/en $TMPROOTDIR/usr/local/share/enigma2/po
+cp -r $TMPROOTDIR/usr/local/share/enigma2/po.old/de $TMPROOTDIR/usr/local/share/enigma2/po
+# Add own language if given
+if [[ ! "$OWNLANG" == "" ]]; then
+  cp -r $TMPROOTDIR/usr/local/share/enigma2/po.old/$OWNLANG $TMPROOTDIR/usr/local/share/enigma2/po
+fi
+sudo rm -rf $TMPROOTDIR/usr/local/share/enigma2/po.old
+
+mv $TMPROOTDIR/usr/local/share/enigma2/countries $TMPROOTDIR/usr/local/share/enigma2/countries.old
+mkdir $TMPROOTDIR/usr/local/share/enigma2/countries
+cp -r $TMPROOTDIR/usr/local/share/enigma2/countries.old/missing.* $TMPROOTDIR/usr/local/share/enigma2/countries
+cp -r $TMPROOTDIR/usr/local/share/enigma2/countries.old/en.* $TMPROOTDIR/usr/local/share/enigma2/countries
+cp -r $TMPROOTDIR/usr/local/share/enigma2/countries.old/de.* $TMPROOTDIR/usr/local/share/enigma2/countries
+if [[ ! "$OWNLANG" == "" ]]; then
+  cp -r $TMPROOTDIR/usr/local/share/enigma2/countries.old/$OWNLANG.* $TMPROOTDIR/usr/local/share/enigma2/countries
+fi
+sudo rm -rf $TMPROOTDIR/usr/local/share/enigma2/countries.old
+
+# Update /usr/lib/enigma2/python/Components/Language.py
+# First remove all language lines from it
+sed -i -e '/\t\tself.addLanguage(/d' $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.py
+# Add en and ge
+sed -i "s/country!/&\n\t\tself.addLanguage(\"Deutsch\",     \"de\", \"DE\")\n\t\tself.addLanguage(\"English\",     \"en\", \"EN\")/g" $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.py
+# Add own language if given
+if [[ ! "$OWNLANG" == "" ]]; then
+  sed -i 's/("English",     "en", "EN")/&\n\t\tself.addLanguage(\"Your own\",    \"'$OWNLANG'", \"'$OWNCOUNTRY'\")/g' $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.py
+fi
+rm $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.pyo
+# Compile Language.py
+python -O -m py_compile $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.py
+
+
+# we need libav files
+#if [ -d $TMPROOTDIR/usr/lib/gstreamer-0.10 ]; then
+#  rm -f $TMPROOTDIR/usr/lib/libav*
+#fi
+
+#remove all .py-files
+find $TMPROOTDIR/usr/lib/ -name '*.pyc' -exec rm {} \;
+find $TMPROOTDIR/usr/lib/ -not -name 'mytest.py' -name '*.py' -exec rm -f {} \;
