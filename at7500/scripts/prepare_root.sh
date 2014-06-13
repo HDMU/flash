@@ -29,28 +29,28 @@ if [[ ! "$OWNLANG" == "" ]]; then
 fi
 sudo rm -rf $TMPROOTDIR/usr/local/share/enigma2/po.old
 
-mv $TMPROOTDIR/usr/local/share/enigma2/countries $TMPROOTDIR/usr/local/share/enigma2/countries.old
-mkdir $TMPROOTDIR/usr/local/share/enigma2/countries
-cp -r $TMPROOTDIR/usr/local/share/enigma2/countries.old/missing.* $TMPROOTDIR/usr/local/share/enigma2/countries
-cp -r $TMPROOTDIR/usr/local/share/enigma2/countries.old/en.* $TMPROOTDIR/usr/local/share/enigma2/countries
-cp -r $TMPROOTDIR/usr/local/share/enigma2/countries.old/de.* $TMPROOTDIR/usr/local/share/enigma2/countries
-if [[ ! "$OWNLANG" == "" ]]; then
-  cp -r $TMPROOTDIR/usr/local/share/enigma2/countries.old/$OWNLANG.* $TMPROOTDIR/usr/local/share/enigma2/countries
-fi
-sudo rm -rf $TMPROOTDIR/usr/local/share/enigma2/countries.old
+#mv $TMPROOTDIR/usr/local/share/enigma2/countries $TMPROOTDIR/usr/local/share/enigma2/countries.old
+#mkdir $TMPROOTDIR/usr/local/share/enigma2/countries
+#cp -r $TMPROOTDIR/usr/local/share/enigma2/countries.old/missing.* $TMPROOTDIR/usr/local/share/enigma2/countries
+#cp -r $TMPROOTDIR/usr/local/share/enigma2/countries.old/en.* $TMPROOTDIR/usr/local/share/enigma2/countries
+#cp -r $TMPROOTDIR/usr/local/share/enigma2/countries.old/de.* $TMPROOTDIR/usr/local/share/enigma2/countries
+#if [[ ! "$OWNLANG" == "" ]]; then
+#  cp -r $TMPROOTDIR/usr/local/share/enigma2/countries.old/$OWNLANG.* $TMPROOTDIR/usr/local/share/enigma2/countries
+#fi
+#sudo rm -rf $TMPROOTDIR/usr/local/share/enigma2/countries.old
 
 # Update /usr/lib/enigma2/python/Components/Language.py
 # First remove all language lines from it
-sed -i -e '/\t\tself.addLanguage(/d' $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.py
+#sed -i -e '/\t\tself.addLanguage(/d' $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.py
 # Add en and ge
-sed -i "s/country!/&\n\t\tself.addLanguage(\"Deutsch\",     \"de\", \"DE\")\n\t\tself.addLanguage(\"English\",     \"en\", \"EN\")/g" $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.py
+#sed -i "s/country!/&\n\t\tself.addLanguage(\"Deutsch\",     \"de\", \"DE\")\n\t\tself.addLanguage(\"English\",     \"en\", \"EN\")/g" $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.py
 # Add own language if given
-if [[ ! "$OWNLANG" == "" ]]; then
-  sed -i 's/("English",     "en", "EN")/&\n\t\tself.addLanguage(\"Your own\",    \"'$OWNLANG'", \"'$OWNCOUNTRY'\")/g' $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.py
-fi
-rm $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.pyo
+#if [[ ! "$OWNLANG" == "" ]]; then
+ # sed -i 's/("English",     "en", "EN")/&\n\t\tself.addLanguage(\"Your own\",    \"'$OWNLANG'", \"'$OWNCOUNTRY'\")/g' $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.py
+#fi
+#rm $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.pyo
 # Compile Language.py
-python -O -m py_compile $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.py
+#python -O -m py_compile $TMPROOTDIR/usr/lib/enigma2/python/Components/Language.py
 
 
 # we need libav files
