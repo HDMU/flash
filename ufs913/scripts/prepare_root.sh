@@ -23,6 +23,9 @@ if [ ! -e $TMPROOTDIR/dev/mtd0 ]; then
 fi
 
 mv $TMPROOTDIR/boot/uImage $TMPKERNELDIR/uImage
+mv $TMPROOTDIR/lib/firmware/* $TMPFWDIR
+mv $TMPROOTDIR/boot/audio.elf $TMPFWDIR/
+mv $TMPROOTDIR/boot/video.elf $TMPFWDIR/
 rm -fr $TMPROOTDIR/boot
 mv $TMPROOTDIR/lib/firmware/* $TMPFWDIR
 
