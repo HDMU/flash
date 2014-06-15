@@ -21,16 +21,14 @@ if [ ! -e $TMPROOTDIR/dev/mtd0 ]; then
 fi
 
 mv $TMPROOTDIR/boot/uImage $TMPKERNELDIR/uImage
-mv $TMPROOTDIR/boot/uImage $TMPKERNELDIR/uImage
 mv $TMPROOTDIR/boot/audio.elf $TMPFWDIR/
 mv $TMPROOTDIR/boot/video.elf $TMPFWDIR/
 rm -fr $TMPROOTDIR/boot
-mv $TMPROOTDIR/lib/firmware/* $TMPFWDIR/
 
 if [ -e $TMPROOTDIR/var/etc/fstab ]; then
-	echo "/dev/mtdblock3	/lib/firmware	jffs2	defaults	0	0" >> $TMPROOTDIR/var/etc/fstab
+	echo "/dev/mtdblock3	/boot	jffs2	defaults	0	0" >> $TMPROOTDIR/var/etc/fstab
 	#echo "/dev/mtdblock5	/swap	jffs2	defaults	0	0" >> $TMPROOTDIR/var/etc/fstab
 else
-	echo "/dev/mtdblock3	/lib/firmware	jffs2	defaults	0	0" >> $TMPROOTDIR/etc/fstab
+	echo "/dev/mtdblock3	/boot	jffs2	defaults	0	0" >> $TMPROOTDIR/etc/fstab
 	#echo "/dev/mtdblock5	/swap	jffs2	defaults	0	0" >> $TMPROOTDIR/etc/fstab
 fi
