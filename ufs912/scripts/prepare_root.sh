@@ -9,8 +9,6 @@ TMPFWDIR=$5
 
 cp -a $RELEASEDIR/* $TMPROOTDIR
 cp $RELEASEDIR/.version $TMPROOTDIR
-mv $TMPROOTDIR/lib/firmware/audio.elf $TMPFWDIR/
-mv $TMPROOTDIR/lib/firmware/video.elf $TMPFWDIR/
 
 if [ ! -e $TMPROOTDIR/dev/mtd0 ]; then
 	cd $TMPROOTDIR/dev/
