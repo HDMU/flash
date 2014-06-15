@@ -23,8 +23,7 @@ if [ ! -e $TMPROOTDIR/dev/mtd0 ]; then
 fi
 
 mv $TMPROOTDIR/boot/uImage $TMPKERNELDIR/uImage
-mv $TMPROOTDIR/boot/audio.elf $TMPFWDIR/
-mv $TMPROOTDIR/boot/video.elf $TMPFWDIR/
+mv $TMPROOTDIR/boot/* $TMPFWDIR/
 rm -fr $TMPROOTDIR/boot/*
 
 if [ -e $TMPROOTDIR/var/etc/fstab ]; then
