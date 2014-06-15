@@ -25,7 +25,7 @@ fi
 mv $TMPROOTDIR/boot/uImage $TMPKERNELDIR/uImage
 mv $TMPROOTDIR/boot/audio.elf $TMPFWDIR/
 mv $TMPROOTDIR/boot/video.elf $TMPFWDIR/
-rm -fr $TMPROOTDIR/boot
+rm -fr $TMPROOTDIR/boot/*
 
 if [ -e $TMPROOTDIR/var/etc/fstab ]; then
 	echo "/dev/mtdblock8	/boot	jffs2	defaults	0	0" >> $TMPROOTDIR/var/etc/fstab
