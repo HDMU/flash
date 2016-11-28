@@ -9,7 +9,7 @@ CURDIR=`pwd`
 BASEDIR=$CURDIR/../..
 
 TUFSBOXDIR=$BASEDIR/tufsbox
-CDKDIR=$BASEDIR/cdk
+CDKDIR=$BASEDIR/cdk_new
 TFINSTALLERDIR=$CDKDIR/tfinstaller
 
 mkdir -p $CURDIR/out
